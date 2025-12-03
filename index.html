@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Best Memories 💗</title>
+
+<!-- Clean minimal aesthetic -->
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #fafafa;
+        font-family: "Poppins", sans-serif;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 25px 10px;
+        font-size: 26px;
+        font-weight: 600;
+        color: #d0488e;
+        letter-spacing: 0.5px;
+    }
+
+    /* Gallery Vertical Scroll */
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 38px;
+        padding: 32px 0 32px 0;
+        max-width: 600px;
+        margin: 0 auto;
+        overflow-y: auto;
+    }
+
+    .item {
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 6px 18px rgba(214,51,132,0.10), 0 1.5px 4px rgba(0,0,0,0.04);
+        transition: 0.2s cubic-bezier(.77,0,.18,1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 12px;
+    }
+
+    .item:hover {
+        transform: scale(1.03);
+        box-shadow: 0 12px 32px rgba(214,51,132,0.16), 0 2px 8px rgba(0,0,0,0.08);
+        z-index: 2;
+    }
+
+    .item img {
+        width: 100%;
+        max-width: 520px;
+        height: 340px;
+        object-fit: cover;
+        display: block;
+        border-bottom: 1px solid #ffe0f0;
+        background: #f8f8f8;
+        transition: filter 0.3s;
+    }
+
+    .item:hover img {
+        filter: brightness(1.08) saturate(1.2);
+    }
+
+    .cap {
+        padding: 18px 16px 10px 16px;
+        font-size: 1.18rem;
+        text-align: center;
+        color: #b03167;
+        font-weight: 500;
+        background: rgba(255,255,255,0.85);
+        border-radius: 0 0 18px 18px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: 0.01em;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #777;
+        font-size: 13px;
+    }
+</style>
+
+</head>
+<body>
+
+
+<section class="our-story-section" style="max-width:700px;margin:32px auto 18px auto;padding:24px 18px 18px 18px;background:rgba(255,255,255,0.98);border-radius:18px;box-shadow:0 2px 12px 0 rgba(214,51,132,0.04);color:#b03167;font-size:1.08rem;font-weight:500;line-height:1.7;">
+    <h2 style="color:#d63384;font-size:1.4rem;margin-bottom:18px;font-weight:700;text-align:center;">💫 Our Story — Cute & Romantic Version</h2>
+    <p>We actually crossed paths long before we ever became “us.”<br>
+    Back then, we both wanted something, but life had other plans.<br>
+    My mind was messy, my life wasn’t ready,<br>
+    and even though we liked each other…<br>
+    we couldn’t turn it into love yet.</p>
+    <p>But fate wasn’t done with us.<br>
+    Months later, we met again — this time at Lockdown Bajar.<br>
+    It was such a simple place, such a normal moment,<br>
+    but somehow it felt different… warmer.</p>
+    <p>That night, you texted me.<br>
+    One message… then one more…<br>
+    and suddenly we were talking for hours,<br>
+    like two people who had been waiting for the right time to find each other again.</p>
+    <p>Slowly, we decided to give “us” a chance.<br>
+    I’ll be honest — at first, my feelings were quiet.<br>
+    But yours weren’t.<br>
+    You cared for me.<br>
+    You stayed.<br>
+    You loved me even when I didn’t know how to love myself.<br>
+    You never gave up on me — not even once.</p>
+    <p>And little by little, your effort became my feelings.<br>
+    Your patience became my comfort.<br>
+    Your heart became my home.</p>
+    <p>And that’s how our relationship finally bloomed —<br>
+    not suddenly, not perfectly,<br>
+    but beautifully, slowly,<br>
+    and exactly the way real love is supposed to grow.</p>
+    <p>💗 From “maybe someday” to “finally us.”<br>
+    That’s our story.</p>
+</section>
+
+<h1>Our Best Memories 💗</h1>
+
+<!-- Auto Gallery -->
+<div class="gallery" id="gallery"></div>
+
+<footer>Made with ❤️ only for us</footer>
+
+<!-- JS inside same file -->
+<script>
+    // Your EXACT captions — unchanged
+    const captions = [
+        "Our first date… even the air felt softer with you.",
+        "Two shy eyes, one growing connection… our beginning.",
+        "Your smile that day… it felt like sunshine choosing me.",
+        "The moment your hand touched mine… everything felt right.",
+        "Gourang Park was pretty… but you were unforgettable.",
+        "You looked so beautiful that night… even the lights stared.",
+        "Freshers Night gave me a stage… but you were my highlight."
+    ];
+
+    const gallery = document.getElementById("gallery");
+
+    // Load images automatically
+    captions.forEach((text, index) => {
+        const num = String(index + 1).padStart(2, "0"); // 01, 02...
+        const div = document.createElement("div");
+        div.className = "item";
+
+        div.innerHTML = `
+            <img src="images/${num}.jpg" alt="Memory ${num}">
+            <div class="cap">${text}</div>
+        `;
+        gallery.appendChild(div);
+    });
+</script>
+
+</body>
+</html>
