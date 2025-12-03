@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Us 💗</title>
+
+<style>
+/* GLOBAL */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #fafafa;
+    color: #333;
+}
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #d0488e;
+    margin-top: 20px;
+    transition: transform 1.2s cubic-bezier(.77,0,.18,1), text-shadow 1.2s;
+}
+h1.animate {
+    transform: scale(1.04) translateY(-6px);
+    text-shadow: 0 2px 16px #ffd1ea44;
+    animation: shimmer 1.2s linear;
+}
+@keyframes shimmer {
+    0% { text-shadow: 0 2px 16px #ffd1ea44, 0 0 0 #fff; }
+    50% { text-shadow: 0 2px 32px #ffd1ea99, 0 0 12px #fff; }
+    100% { text-shadow: 0 2px 16px #ffd1ea44, 0 0 0 #fff; }
+}
+.section {
+    display: none;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s cubic-bezier(.77,0,.18,1), transform 1s cubic-bezier(.77,0,.18,1);
+}
+.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn, .tap-btn {
+    display: block;
+    width: fit-content;
+    margin: 25px auto;
+    padding: 12px 25px;
+    background: #d0488e;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(.77,0,.18,1), box-shadow 0.3s;
+}
+.btn:hover, .tap-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 18px rgba(208,72,142,0.12);
+}
+
+/* STORY */
+.story-box {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    line-height: 1.6;
+    margin-top: 15px;
+}
+.story-box p { margin-bottom: 12px; }
+
+/* PUZZLE */
+.puzzle-box { text-align: center; margin-top: 20px; }
+.heart {
+    font-size: 40px;
+    margin: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.heart:hover {
+    animation: pulse 0.7s;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+.heart.correct {
+    color: #ff2f80;
+    transform: scale(1.2);
+    animation: tap-glow 0.5s;
+}
+@keyframes tap-glow {
+    0% { box-shadow: 0 0 0 #ff2f80; }
+    50% { box-shadow: 0 0 18px #ff2f8088; }
+    100% { box-shadow: 0 0 0 #ff2f80; }
+}
+
+/* GALLERY (Instagram-style) */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+}
+.gallery img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 6px;
+    animation: floaty 3.5s ease-in-out infinite;
+}
+@keyframes floaty {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+.caption {
+    font-size: 14px;
+    text-align: center;
+    color: #b02266;
+    margin-bottom: 15px;
+}
+
+/* REASONS */
+.reason {
+    background: #fff;
+    padding: 15px 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    margin: 12px 0;
+    font-size: 15px;
+}
+
+/* FINAL SURPRISE */
+#finalPage {
+    text-align: center;
+    position: relative;
+}
+
+.tap-btn {
+    display: inline-block;
+    background: #d0488e;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 30px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#floatingHearts {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    display: none;
+}
+
+.heart-float {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.75;
+    animation: rise 5s linear infinite;
+}
+
+@keyframes rise {
+    from { transform: translateY(50px); opacity: 0.9; }
+    to { transform: translateY(-600px); opacity: 0; }
+}
+
+.final-text {
+    opacity: 0;
+    font-size: 20px;
+    color: #d0488e;
+    margin-top: 25px;
+    transition: 1.5s;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #777;
+    margin-top: 40px;
+}
+
+/* Cute Floating Hearts Animation */
+#cuteFloatingHearts {
+    position: fixed;
+    left: 0; top: 0;
+    width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+.cute-heart-float {
+    position: absolute;
+    font-size: 22px;
+    opacity: 0.7;
+    animation: cute-rise 6s linear;
+    will-change: transform, opacity;
+}
+@keyframes cute-rise {
+    from { transform: translateY(40px); opacity: 0.8; }
+    to { transform: translateY(-600px); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Floating Hearts Animation (Global) -->
+<div id="cuteFloatingHearts"></div>
+
+<!-- PAGE 1: STORY -->
+<div id="page1" class="section show">
+    <h1>Our Story 💗</h1>
+    <div class="story-box">
+        <p>We actually crossed paths long before we ever became “us.” Back then, we both wanted something, but life had other plans. My mind was messy, my life wasn’t ready, and even though we liked each other… we couldn’t turn it into love yet.</p>
+
+        <p>But fate wasn’t done with us. Months later, we met again — this time at Lockdown Bajar. It was such a simple place, such a normal moment, but somehow it felt different… warmer.</p>
+
+        <p>That night, you texted me. One message… then one more… and suddenly we were talking for hours — like two people who had been waiting for the right time to find each other again.</p>
+
+        <p>Slowly, we decided to give “us” a chance. At first, my feelings were quiet. But yours weren’t. You cared for me, stayed for me, loved me even when I didn’t know how to love myself. You never gave up on me — not even once.</p>
+
+        <p>And little by little, your effort became my feelings. Your patience became my comfort. Your heart became my home.</p>
+
+        <p>From “maybe someday” to “finally us.” That’s our story. 💗</p>
+    </div>
+
+    <button class="btn" onclick="goTo(2)">Next ➝</button>
+</div>
+
+<!-- PAGE 2: PUZZLE -->
+<div id="page2" class="section">
+    <h1>A Small Puzzle 💗</h1>
+    <p style="text-align:center;">Tap the hearts in order 🧩</p>
+
+    <div class="puzzle-box">
+        <span class="heart" onclick="tapHeart(1)">💗</span>
+        <span class="heart" onclick="tapHeart(2)">💗</span>
+        <span class="heart" onclick="tapHeart(3)">💗</span>
+    </div>
+
+    <button id="puzzleDone" class="btn" style="display:none;" onclick="goTo(3)">Continue ➝</button>
+</div>
+
+<!-- PAGE 3: MEMORIES -->
+<div id="page3" class="section">
+    <h1>Our Memories 💗</h1>
+    <div id="gallery" class="gallery"></div>
+
+    <button class="btn" onclick="goTo(4)">Next ➝</button>
+</div>
+
+<!-- PAGE 4: REASONS -->
+<div id="page4" class="section">
+    <h1>Reasons I Love You 💗</h1>
+
+    <div class="reason">Your smile makes everything better.</div>
+    <div class="reason">You never gave up on me.</div>
+    <div class="reason">You care in a way nobody else does.</div>
+    <div class="reason">You are my comfort place.</div>
+    <div class="reason">You make ordinary days feel special.</div>
+    <div class="reason">You believe in me.</div>
+    <div class="reason">Being with you feels like home.</div>
+
+    <button class="btn" onclick="goTo(5)">Tap for one last thing… 💗</button>
+</div>
+
+<!-- PAGE 5: FINAL SURPRISE -->
+<div id="page5" class="section">
+    <div id="finalPage">
+        <h1>For You 💗</h1>
+
+        <div id="floatingHearts"></div>
+
+        <button id="tapMessage" class="tap-btn" onclick="startFinal()">Tap for one last thing 💗</button>
+
+        <div id="line1" class="final-text">I love you more than I could ever put into words.</div>
+        <div id="line2" class="final-text">Thank you for choosing me.</div>
+        <div id="line3" class="final-text">This journey is ours… forever. 💗</div>
+    </div>
+
+    <footer>Made with ❤️ only for us</footer>
+</div>
+
+<script>
+function goTo(n) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("show"));
+    document.getElementById("page" + n).classList.add("show");
+    // Animate heading
+    const h = document.querySelector("#page" + n + " h1");
+    if (h) {
+        h.classList.add("animate");
+        setTimeout(() => h.classList.remove("animate"), 1200);
+    }
+}
+
+/* Puzzle */
+let step = 1;
+function tapHeart(n) {
+    if (n === step) {
+        const heartEl = document.getElementsByClassName("heart")[n - 1];
+        heartEl.classList.add("correct");
+        // Remove animation class after animation ends for retrigger
+        setTimeout(() => heartEl.classList.remove("correct"), 500);
+        step++;
+        if (step === 4) document.getElementById("puzzleDone").style.display = "block";
+    }
+}
+
+/* Gallery */
+const captions = [
+    "Our first date… even the air felt softer with you.",
+    "Two shy eyes, one growing connection… our beginning.",
+    "Your smile that day… it felt like sunshine choosing me.",
+    "The moment your hand touched mine… everything felt right.",
+    "Gourang Park was pretty… but you were unforgettable.",
+    "You looked so beautiful that night… even the lights stared.",
+    "Freshers Night gave me a stage… but you were my highlight."
+];
+
+const gallery = document.getElementById("gallery");
+
+captions.forEach((text, index) => {
+    const num = String(index + 1).padStart(2, "0");
+    const box = document.createElement("div");
+    box.innerHTML = `<img src="${num}.jpg"><div class="caption">${text}</div>`;
+    gallery.appendChild(box);
+});
+
+/* FINAL SURPRISE */
+function startFinal() {
+    document.getElementById("tapMessage").style.display = "none";
+
+    const container = document.getElementById("floatingHearts");
+    container.style.display = "block";
+
+    for (let i = 0; i < 25; i++) {
+        let h = document.createElement("div");
+        h.innerHTML = "💗";
+        h.className = "heart-float";
+        h.style.left = Math.random() * 100 + "%";
+        h.style.animationDuration = (4 + Math.random() * 3) + "s";
+        container.appendChild(h);
+    }
+
+    setTimeout(() => document.getElementById("line1").style.opacity = 1, 800);
+    setTimeout(() => document.getElementById("line2").style.opacity = 1, 2000);
+    setTimeout(() => document.getElementById("line3").style.opacity = 1, 3500);
+}
+
+// Cute Floating Hearts Animation (Global)
+const cuteHeartsContainer = document.getElementById("cuteFloatingHearts");
+function spawnCuteHeart() {
+    const heart = document.createElement("div");
+    heart.className = "cute-heart-float";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.top = (80 + Math.random() * 60) + "vh";
+    heart.style.animationDuration = (4 + Math.random() * 2) + "s";
+    cuteHeartsContainer.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(spawnCuteHeart, 1200);
+</script>
+
+</body>
+</html>
